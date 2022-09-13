@@ -52,7 +52,7 @@ def get_outputpath(parent_dir: Path, filename: str, use_orig_extension: bool):
     if not subdir.exists():
         subdir.mkdir(parents=True, exist_ok=True)
 
-    return Path(subdir.joinpath(filename + '.vb' if not use_orig_extension else ''))
+    return Path(subdir.joinpath(filename + ('.vb' if not use_orig_extension else '')))
 
 
 def extract_macros(parser: VBA_Parser, vba_encoding):
@@ -88,7 +88,7 @@ if __name__ == '__main__':
         basename = src.stem
         dest = Path(root.joinpath(basename))
         dest.mkdir(parents=True, exist_ok=True)
-        rmtree(dest.absolute())
+        rmtree(dest.absolute(), ignore_errors=True)
         print('Extract vba files from {source} to {dest}'.format(source=source, dest=dest))
 
         # Extract vba source files from the MS Office file and save each vba file into the sub directory as of its MS Office file name.
