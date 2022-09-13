@@ -88,7 +88,7 @@ if __name__ == '__main__':
         basename = src.stem
         dest = Path(root.joinpath(basename))
         dest.mkdir(parents=True, exist_ok=True)
-        rmtree(dest.absolute(), ignore_errors=True)
+        rmtree(dest)
         print('Extract vba files from {source} to {dest}'.format(source=source, dest=dest))
 
         # Extract vba source files from the MS Office file and save each vba file into the sub directory as of its MS Office file name.
