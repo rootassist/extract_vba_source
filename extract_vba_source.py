@@ -15,8 +15,8 @@ def get_args():
     parser = ArgumentParser(description='Extract vba source files from an MS Office file with macro.')
     parser.add_argument('sources', metavar='MS_OFFICE_FILE', type=str, nargs='+',
                         help='Paths to source MS Office file or directory.')
-    parser.add_argument('--dest', type=str, default='vba_src',
-                        help='Destination directory path to output vba source files [default: ./vba_src].')
+    parser.add_argument('--dest', type=str, default='.',
+                        help='Destination directory path to output vba source files [default: .].')
     parser.add_argument('--orig-extension', dest='use_orig_extension', action='store_true',
                         help='Use an original extension (.bas, .cls, .frm) for extracted vba source files [default: use .vb].')
     parser.add_argument('--src-encoding', dest='src_encoding', type=str, default='shift_jis',
@@ -87,6 +87,9 @@ if __name__ == '__main__':
         src = Path(source)
         basename = src.stem
         dest = Path(root.joinpath(basename))
+        dest.mkdir(parents=True, exist_ok=True)
+        # extract to basename/vba/
+        dest = Path(dest.joinpath('vba'))
         dest.mkdir(parents=True, exist_ok=True)
         rmtree(dest.absolute(), ignore_errors=True)
         print('Extract vba files from {source} to {dest}'.format(source=source, dest=dest))

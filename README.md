@@ -17,4 +17,4 @@ and then specify the **azure-pipelines-extract-vba.yml** added your Git reposito
 
 ### How to run
 1.  When you pushed your change to your Git repository on Azure DevOps,
-the Pipeline will run and then extract VBA source files into the `/vba-src` directory.
+the Pipeline will run and then extract VBA source files into the current directory.
