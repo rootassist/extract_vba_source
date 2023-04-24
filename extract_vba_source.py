@@ -98,5 +98,9 @@ if __name__ == '__main__':
         vba_parser = VBA_Parser(src)
         for vba_filename, vba_code in extract_macros(vba_parser, args.src_encoding):
             vba_file = get_outputpath(dest, vba_filename, args.use_orig_extension)
-            vba_file.write_text(filter_vba(vba_code), encoding=args.out_encoding)
-            print('[{basename}] {vba_file} is generated.'.format(basename=basename, vba_file=vba_file))
+            vba_code_filtered = filter_vba(vba_code)
+            # No output if file size is zero.
+            if vba_code_filtered != '':
+                vba_file.write_text(vba_code_filtered, encoding=args.out_encoding)
+                print('[{basename}] {vba_file} is generated.'.format(basename=basename, vba_file=vba_file))
+    
